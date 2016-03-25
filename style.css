@@ -1,0 +1,39 @@
+#regletter {
+  position: relative;
+  bottom: 35px;
+}
+
+#rectangle {
+  display:inline-block;
+  width:700px;
+  height:75px;
+  border:2px solid #000;
+}
+
+#header {
+    background-color:green;
+    color:white;
+    font-family: Arial; 
+    text-align:left;
+    padding:35px;
+}
+
+#verticalLine {
+    border-left: thick solid #ff0000;
+}
+
+.Diagram {
+  position: relative;
+  border-right: thick solid black;
+  border-bottom: thick solid black;
+  padding: 10px;
+}
+
+.Memory {
+  position: relative;
+  bottom:662px;
+  left: 770px;
+  border-right: thick solid black;
+  border-bottom: thick solid black;
+  padding: 10px;
+}
