@@ -1,4 +1,5 @@
 import {Component} from "angular2/core";
+import {RegisterNode} from "./register-node";
 
 @Component({
 	selector: "my-app",
@@ -6,4 +7,5 @@ import {Component} from "angular2/core";
 	styleUrls: ["app/app.component.css"]
 })
 export class AppComponent {
+	public rn = new RegisterNode();
 }
