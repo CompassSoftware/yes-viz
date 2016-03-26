@@ -5,9 +5,25 @@
 
 #rectangle {
   display:inline-block;
-  width:700px;
-  height:75px;
-  border:2px solid #000;
+  width:90%;
+  height:10%;
+  border:1px solid #000;
+}
+
+#registers {
+    display:inline-block;
+    width: 90%;
+    height: 25%;
+    border:1px solid #000;
+
+}
+
+#memory {
+    display:inline-block;
+    width: 90%;
+    height: 25%;
+    border:1px solid #000;
+    
 }
 
 #header {
@@ -15,25 +31,26 @@
     color:white;
     font-family: Arial; 
     text-align:left;
-    padding:35px;
+    padding:1%;
 }
 
 #verticalLine {
     border-left: thick solid #ff0000;
 }
 
-.Diagram {
-  position: relative;
-  border-right: thick solid black;
-  border-bottom: thick solid black;
-  padding: 10px;
+.registerBlock {
+  margin-left: 50%;
+  margin-top: -34%;
+  
 }
 
-.Memory {
-  position: relative;
-  bottom:662px;
-  left: 770px;
-  border-right: thick solid black;
-  border-bottom: thick solid black;
-  padding: 10px;
+.memoryBlock {
+    margin-left: 50%;
+    margin-top:  5%;
+}
+
+div.fullWidth {
+    width:100%;
+    height:100%;
+    background-color:#CCC;
 }

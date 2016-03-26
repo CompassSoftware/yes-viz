@@ -1,41 +1,49 @@
-<!DOCTYPE html>
-<html>
-
 <head>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
 </head>
 
 <body>
-	<div style="width:550px">
-		<h1 align=left style="font-family: Arial; display:inline-block">YES Visual</h1>
-		<button style="margin-left:10px">Test</button>
-		<div>
-			<span style="position:relative;bottom:35px">W</span>
-			<div style="display:inline-block;width:500px;height:75px;border:2px solid #000;"></div>
-		</div>
-		<br>
-		<div>
-			<span style="position:relative;bottom:35px">M</span>
-			<div style="display:inline-block;width:500px;height:75px;border:2px solid #000;"></div>
-		</div>
-		<br>
-		<div>
-			<span style="position:relative;bottom:35px">E</span>
-			<div style="display:inline-block;width:500px;height:75px;border:2px solid #000;"></div>
-		</div>
-		<br>
-		<div>
-			<span style="position:relative;bottom:35px">D</span>
-			<div style="display:inline-block;width:500px;height:75px;border:2px solid #000;"></div>
-		</div>
-		<br>
-		<div>
-			<span style="position:relative;bottom:35px">F</span>
-			<div style="display:inline-block;width:500px;height:75px;border:2px solid #000;"></div>
-		</div>
-	</div>
+    <div class="fullWidth">
+        <h1 align=left id="header">YES Visual <button style="margin-left:10px">Run</button>
+            <button style="margin-left:30px">Upload</button></h1>
+        
+        <div class="Diagram" style="width:50%">
+            <div>
+                <span id="regletter">W</span>
+                <div id="rectangle"></div>
+            </div>
+            <br>
+            <div>
+                <span id="regletter">M</span>
+                <div id="rectangle"></div>
+            </div>
+            <br>
+            <div>
+                <span id="regletter">E</span>
+                <div id="rectangle"></div>
+            </div>
+            <br>
+            <div>
+                <span id="regletter">D</span>
+                <div id="rectangle"></div>
+            </div>
+            <br>
+            <div>
+                <span id="regletter">F</span>
+                <div id="rectangle"></div>
+            </div>
+        </div>
+        
+        
+        <div class="registerBlock" style="width:50%">
+            <div id="registers"> %esp: 0x02939399</div>
+        </div>
+        
+        <div class="memoryBlock" style="width:50%">
+            <div id="memory"> 0x0000000a: 02934499</div>
+        </div>
+    </div>
 </body>
 
 </html>
-
