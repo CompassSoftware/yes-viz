@@ -1,11 +1,19 @@
 import {Component} from "angular2/core";
 import {RegisterNode} from "./register-node";
+import {FileManagerService} from "./file-manager.service";
 
 @Component({
 	selector: "my-app",
 	templateUrl: "app/app.component.html",
-	styleUrls: ["app/app.component.css"]
+	styleUrls: ["app/app.component.css"],
+	providers: [FileManagerService]
 })
 export class AppComponent {
 	public rn = new RegisterNode();
+	
+	constructor(private _fileManagerService: FileManagerService) {}
+	
+	changeListener($event) {
+		this._fileManagerService.readFile($event.target.files[0]);
+	}
 }
