@@ -16,4 +16,10 @@ export class AppComponent {
 	changeListener($event) {
 		this._fileManagerService.readFile($event.target.files[0]);
 	}
+	
+	clickListener() {
+		if(this._fileManagerService.hasNextClock()) {
+			console.log(this._fileManagerService.getNextClock());
+		}
+	}
 }
