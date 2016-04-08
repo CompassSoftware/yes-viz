@@ -1,5 +1,5 @@
 import {Component} from "angular2/core";
-import {RegisterNode} from "./register-node";
+import {CycleNode} from "./cycle-node";
 import {FileManagerService} from "./file-manager.service";
 
 @Component({
@@ -9,7 +9,7 @@ import {FileManagerService} from "./file-manager.service";
 	providers: [FileManagerService]
 })
 export class AppComponent {
-	public rn = new RegisterNode();
+	public cn = new CycleNode();
 	
 	constructor(private _fileManagerService: FileManagerService) {}
 	
