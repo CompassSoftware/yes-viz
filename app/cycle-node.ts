@@ -1,4 +1,6 @@
 export class CycleNode {
+	public cycleNum: string;
+	
 	//stat, icode, valE, valM, dstE, dstM
 	public w: string[] = ["", "", "", "", "", ""];
 	
@@ -16,5 +18,7 @@ export class CycleNode {
 	
 	public next: CycleNode;
 	public previous: CycleNode;
+	
+	constructor(cycleNum: string) {this.cycleNum = cycleNum;}
 }
 
