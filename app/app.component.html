@@ -6,25 +6,29 @@
 		<input type=file (change)="changeListener($event)">
 	</h1>
 	
-	<div class="Diagram" style="width:50%">
+	<div *ngIf="cn" class="Diagram" style="width:50%">
+		<span>Cycle Number {{cn.cycleNum}}</span>
 		<div>
 			<span id="regletter">W</span>
-			<div id="rectangle">{{cn.w[0]}} , {{cn.w[1]}}, {{cn.w[2]}}</div>
+			<div id="rectangle"></div>
 		</div>
 		<br>
 		<div>
 			<span id="regletter">M</span>
-			<div id="rectangle">{{cn.m[0]}} , {{cn.m[1]}}, {{cn.m[2]}}</div>
+			<div id="rectangle"></div>
 		</div>
 		<br>
 		<div>
 			<span id="regletter">E</span>
-			<div id="rectangle">{{cn.e[0]}} , {{cn.e[1]}}, {{cn.e[2]}}</div>
+			<div id="rectangle">
+				{{cn.e[0]}}, {{cn.e[1]}}, {{cn.e[2]}}, {{cn.e[3]}}, {{cn.e[4]}}<br>
+				{{cn.e[5]}}, {{cn.e[6]}}, {{cn.e[7]}}, {{cn.e[8]}}, {{cn.e[9]}}
+			</div>
 		</div>
 		<br>
 		<div>
 			<span id="regletter">D</span>
-			<div id="rectangle">{{cn.d[0]}} , {{cn.d[1]}}, {{cn.d[2]}}</div>
+			<div id="rectangle">{{cn.d[0]}}, {{cn.d[1]}}, {{cn.d[2]}}, {{cn.d[3]}}, {{cn.d[4]}}, {{cn.d[5]}}, {{cn.d[6]}}</div>
 		</div>
 		<br>
 		<div>

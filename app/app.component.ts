@@ -10,13 +10,14 @@ import {ParserService} from "./parser.service";
 	providers: [FileManagerService, ParserService]
 })
 export class AppComponent {
-	public cn = new CycleNode();
+	public cn: CycleNode;
 	
 	constructor(private _fileManagerService: FileManagerService,
 				private _parserService: ParserService) {}
 	
 	changeListener($event) {
-		this._fileManagerService.readFile($event.target.files[0]);
+		if($event.target.files.length != 0)
+			this._fileManagerService.readFile($event.target.files[0]);
 	}
 	
 	clickListener() {
@@ -24,7 +25,7 @@ export class AppComponent {
 		if(this._fileManagerService.hasNextClock()) {
 			data = this._fileManagerService.getNextClock();
 			console.log(data);
-			this._parserService.parse(data);
+			this.cn = this._parserService.parse(data);
 		}
 	}
 }

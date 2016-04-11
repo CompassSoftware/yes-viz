@@ -2,8 +2,8 @@ import {Injectable} from "angular2/core";
 
 @Injectable()
 export class FileManagerService {
-	private data: string[];
-	private index: int;
+	private data: string[] = [];
+	private index = 0;
 	
 	readFile(file: File) {
 		var fr = new FileReader();
