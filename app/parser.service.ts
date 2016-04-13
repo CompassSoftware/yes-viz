@@ -12,6 +12,8 @@ export class ParserService {
 		this.fillF(arr[1]);
 		this.fillD(arr[2]);
 		this.fillE(arr[3], arr[4]);
+		this.fillM(arr[5]);
+		this.fillW(arr[6]);
 		
 		return this.cn;
 	}
@@ -47,5 +49,26 @@ export class ParserService {
 		e[7] = data2.charAt(40);
 		e[8] = data2.charAt(48);
 		e[9] = data2.charAt(56);
+	}
+	
+	private fillM(data: string) {
+		var m = this.cn.m;
+		m[0] = data.charAt(9);
+		m[1] = data.charAt(18);
+		m[2] = data.charAt(25);
+		m[3] = data.substr(33, 16);
+		m[4] = data.substr(56, 16);
+		m[5] = data.charAt(79);
+		m[6] = data.charAt(87);
+	}
+	
+	private fillW(data: string) {
+		var w = this.cn.w;
+		w[0] = data.charAt(9);
+		w[1] = data.charAt(18);
+		w[2] = data.substr(26, 16);
+		w[3] = data.substr(49, 16);
+		w[4] = data.charAt(72);
+		w[5] = data.charAt(80);
 	}
 }
