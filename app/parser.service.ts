@@ -14,6 +14,8 @@ export class ParserService {
 		this.fillE(arr[3], arr[4]);
 		this.fillM(arr[5]);
 		this.fillW(arr[6]);
+		this.fillFlags(arr[8]);
+		this.fillGenRegs(arr[9], arr[10], arr[11], arr[12]);
 		
 		return this.cn;
 	}
@@ -70,5 +72,30 @@ export class ParserService {
 		w[3] = data.substr(49, 16);
 		w[4] = data.charAt(72);
 		w[5] = data.charAt(80);
+	}
+	
+	private fillFlags(data: string) {
+		this.cn.zf = data.charAt(4);
+		this.cn.sf = data.charAt(10);
+		this.cn.of = data.charAt(16);
+	}
+	
+	private fillGenRegs(data1: string, data2: string, data3: string, data4: string) {
+		var regs = this.cn.genRegs;
+		regs[0] = data1.substr(6, 16);
+		regs[1] = data1.substr(29, 16);
+		regs[2] = data1.substr(52, 16);
+		regs[3] = data1.substr(75, 16);
+		regs[4] = data2.substr(6, 16);
+		regs[5] = data2.substr(29, 16);
+		regs[6] = data2.substr(52, 16);
+		regs[7] = data2.substr(75, 16);
+		regs[8] = data3.substr(6, 16);
+		regs[9] = data3.substr(29, 16);
+		regs[10] = data3.substr(52, 16);
+		regs[11] = data3.substr(75, 16);
+		regs[12] = data4.substr(6, 16);
+		regs[13] = data4.substr(29, 16);
+		regs[14] = data4.substr(52, 16);
 	}
 }
