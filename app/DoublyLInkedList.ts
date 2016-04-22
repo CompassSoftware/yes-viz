@@ -6,13 +6,13 @@
 * 
 * @reference https://github.com/vovazolotoy/TypeScript-STL/blob/master/Datastructures/DoublyLinkedList.ts
 */
-import {register-node} from "CHANGE_ME";
+import {CycleNode} from "./cycle-node";
 
-class DoublyLinkedList {
+export class DoublyLinkedList {
 
     private length = 0;
-    private cursor:register-node = null;
-    private head:register-node = null;
+    private cursor:CycleNode = null;
+    private head:CycleNode = null;
     
 	
 	/**
@@ -21,6 +21,7 @@ class DoublyLinkedList {
 	*/
     constructor() {
     }
+  
 
 	/**
 	* insert()
@@ -30,18 +31,18 @@ class DoublyLinkedList {
 	*
 	* @param: node - current node being inserted into the list
 	*/
-    public insert(node:register-node)
+    public insert(node:CycleNode)
     {
-		if (isEmpty())
+		if (this.isEmpty())
         {
-            head = node;
-            cursor = head;
+            this.head = node;
+            this.cursor = this.head;
         }
         else
         {
-            node.previous = cursor;
-            cursor.next = node;
-            cursor = node;
+            node.previous = this.cursor;
+            this.cursor.next = node;
+            this.cursor = node;
         }
 		length++;
     }
@@ -56,9 +57,9 @@ class DoublyLinkedList {
     */
 	public next():boolean
 	{
-		if (current.next != null)
+		if (this.cursor.next != null)
 		{
-			current = current.next;
+			this.cursor = this.cursor.next;
 			return true;
 		}
 		return false;
@@ -74,9 +75,9 @@ class DoublyLinkedList {
 	*/
 	public previous():boolean
 	{
-		if (current.previous != null && current != head)
+		if (this.cursor.previous != null && this.cursor != this.head)
 		{
-			current = current.previous;
+			this.cursor = this.cursor.previous;
 			return true;
 		}
 		return false;
@@ -89,21 +90,21 @@ class DoublyLinkedList {
 	*
 	* @return register-node
 	*/
-	public getCurrent():register-node
+	public getCurrent():CycleNode
 	{
-		if (cursor != null)
+		if (this.cursor != null)
 		{
-			return current;
+			return this.cursor;
 		}
 		return null;
 	}
 	
 	
-	public getHead():register-node
+	public getHead():CycleNode
 	{
-		if (head != null)
+		if (this.head != null)
 		{
-			return head;
+			return this.head;
 		}
 		return null;
 	}
@@ -113,9 +114,9 @@ class DoublyLinkedList {
 	*
 	* Accessor for the current length of the linked list.
     *
-	* @return int
+	* @return number
 	*/
-    public getLength():int{
+    public getLength():number{
         return length;
     }
 
@@ -134,5 +135,6 @@ class DoublyLinkedList {
     }
 
 }
+
 
 

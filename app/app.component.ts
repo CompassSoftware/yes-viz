@@ -1,5 +1,6 @@
 import {Component} from "angular2/core";
 import {CycleNode} from "./cycle-node";
+import {DoublyLinkedList} from "./DoublyLInkedList";
 import {FileManagerService} from "./file-manager.service";
 import {ParserService} from "./parser.service";
 
@@ -10,22 +11,32 @@ import {ParserService} from "./parser.service";
 	providers: [FileManagerService, ParserService]
 })
 export class AppComponent {
-	public cn: CycleNode;
+  public cn: CycleNode;
+  public linkedList: DoublyLinkedList;
 	
 	constructor(private _fileManagerService: FileManagerService,
-				private _parserService: ParserService) {}
+  private _parserService: ParserService) {
+   this.linkedList = new DoublyLinkedList();
+   }
 	
-	changeListener($event) {
+  changeListener($event) {
+  var data: string;
 		if($event.target.files.length != 0)
-			this._fileManagerService.readFile($event.target.files[0]);
-	}
+    this._fileManagerService.readFile($event.target.files[0]);
+    while(this._fileManagerService.hasNextClock()) {
+      data = this._fileManagerService.getNextClock();
+      this.linkedList.insert(this._parserService.parse(data));
+      }
+      this.cn = this.linkedList.getCurrent();
+  }
+
+  nextListener() {
+  this.linkedList.next();
+  this.cn = this.linkedList.getCurrent();
+  }
 	
-	clickListener() {
-		var data: string;
-		if(this._fileManagerService.hasNextClock()) {
-			data = this._fileManagerService.getNextClock();
-			console.log(data);
-			this.cn = this._parserService.parse(data);
-		}
+	prevListener() {
+  this.linkedList.previous();
+  this.cn = this.linkedList.getCurrent();
 	}
 }
