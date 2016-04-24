@@ -44,7 +44,7 @@ export class DoublyLinkedList {
             this.cursor.next = node;
             this.cursor = node;
         }
-		length++;
+		this.length++;
     }
 
 	
@@ -117,7 +117,7 @@ export class DoublyLinkedList {
 	* @return number
 	*/
     public getLength():number{
-        return length;
+        return this.length;
     }
 
 	/*
@@ -128,12 +128,15 @@ export class DoublyLinkedList {
 	* @return boolean - true if length is 0.
 	*/
 	public isEmpty():boolean{
-        if (length == 0){
+        if (this.length == 0){
             return true;
         }
         return false;
     }
-
+	
+	public reset(): void {
+		this.cursor = this.head;
+	}
 }
 
 

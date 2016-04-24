@@ -15,28 +15,32 @@ export class AppComponent {
   public linkedList: DoublyLinkedList;
 	
 	constructor(private _fileManagerService: FileManagerService,
-  private _parserService: ParserService) {
-   this.linkedList = new DoublyLinkedList();
-   }
+				private _parserService: ParserService) {
+		var callback = () : void => {
+			var data: string;
+			this.linkedList = new DoublyLinkedList();
+			while(this._fileManagerService.hasNextClock()) {
+				data = this._fileManagerService.getNextClock();
+				this.linkedList.insert(this._parserService.parse(data));
+			}
+			this.linkedList.reset();
+			this.cn = this.linkedList.getCurrent();
+		};
+		this._fileManagerService.callback = callback;
+    }
 	
-  changeListener($event) {
-  var data: string;
+	changeListener($event) {
 		if($event.target.files.length != 0)
-    this._fileManagerService.readFile($event.target.files[0]);
-    while(this._fileManagerService.hasNextClock()) {
-      data = this._fileManagerService.getNextClock();
-      this.linkedList.insert(this._parserService.parse(data));
-      }
-      this.cn = this.linkedList.getCurrent();
-  }
+			this._fileManagerService.readFile($event.target.files[0]);
+	}
 
-  nextListener() {
-  this.linkedList.next();
-  this.cn = this.linkedList.getCurrent();
-  }
+	nextListener() {
+		this.linkedList.next();
+		this.cn = this.linkedList.getCurrent();
+	}
 	
 	prevListener() {
-  this.linkedList.previous();
-  this.cn = this.linkedList.getCurrent();
+		this.linkedList.previous();
+		this.cn = this.linkedList.getCurrent();
 	}
 }

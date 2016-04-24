@@ -4,6 +4,7 @@ import {Injectable} from "angular2/core";
 export class FileManagerService {
 	private data: string[] = [];
 	private index = 0;
+	public callback: Function;
 	
 	readFile(file: File) {
 		var fr = new FileReader();
@@ -18,6 +19,7 @@ export class FileManagerService {
 	getFileData(data: string, self: FileManagerService) {
 		self.data = data.split("\nAt end of cycle ");
 		self.index = 1;
+		if(self.callback != null) self.callback();
 	}
 	
 	getNextClock() {

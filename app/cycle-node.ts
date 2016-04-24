@@ -25,8 +25,8 @@ export class CycleNode {
 	
 	public mem: string[][] = [];
 	
-	public next: CycleNode;
-	public previous: CycleNode;
+	public next: CycleNode = null;
+	public previous: CycleNode = null;
 	
 	constructor(cycleNum: string) {this.cycleNum = cycleNum;}
 }
