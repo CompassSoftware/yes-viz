@@ -1,76 +1,80 @@
 <div class="fullWidth">
 	<h1 align=left id="header">
 		YES Visual
-    <button style="margin:10px 10px" (click)="prevListener()">Previous</button><button style="margin:10px 10px" (click)="nextListener()">Next</button>
+    <button (click)="prevListener()">Previous</button><button (click)="nextListener()">Next</button>
 		Upload file:
 		<input type=file (change)="changeListener($event)">
 	</h1>
 	
-	<div *ngIf="cn" class="Diagram" style="width:50%;float:left">
-		<span>Cycle Number {{cn.cycleNum}}</span>
-		<div>
-			<span id="regletter">W</span>
-			<div id="rectangle">{{cn.w[0]}}, {{cn.w[1]}}, {{cn.w[2]}}, {{cn.w[3]}}, {{cn.w[4]}}, {{cn.w[5]}}</div>
-		</div>
-		<br>
-		<div>
-			<span id="regletter">M</span>
-			<div id="rectangle">{{cn.m[0]}}, {{cn.m[1]}}, {{cn.m[2]}}, {{cn.m[3]}}, {{cn.m[4]}}, {{cn.m[5]}}, {{cn.m[6]}}</div>
-		</div>
-		<br>
-		<div>
-			<span id="regletter">E</span>
-			<div id="rectangle">
-				{{cn.e[0]}}, {{cn.e[1]}}, {{cn.e[2]}}, {{cn.e[3]}}, {{cn.e[4]}}<br>
-				{{cn.e[5]}}, {{cn.e[6]}}, {{cn.e[7]}}, {{cn.e[8]}}, {{cn.e[9]}}
+	<div class="fLeft">
+		<div *ngIf="cn" class="diagram">
+			<span>Cycle Number {{cn.cycleNum}}</span>
+			<div>
+				<span id="regletter">W</span>
+				<div id="rectangle">{{cn.w[0]}}, {{cn.w[1]}}, {{cn.w[2]}}, {{cn.w[3]}}, {{cn.w[4]}}, {{cn.w[5]}}</div>
 			</div>
+			<br>
+			<div>
+				<span id="regletter">M</span>
+				<div id="rectangle">{{cn.m[0]}}, {{cn.m[1]}}, {{cn.m[2]}}, {{cn.m[3]}}, {{cn.m[4]}}, {{cn.m[5]}}, {{cn.m[6]}}</div>
+			</div>
+			<br>
+			<div>
+				<span id="regletter">E</span>
+				<div id="rectangle">
+					{{cn.e[0]}}, {{cn.e[1]}}, {{cn.e[2]}}, {{cn.e[3]}}, {{cn.e[4]}}<br>
+					{{cn.e[5]}}, {{cn.e[6]}}, {{cn.e[7]}}, {{cn.e[8]}}, {{cn.e[9]}}
+				</div>
+			</div>
+			<br>
+			<div>
+				<span id="regletter">D</span>
+				<div id="rectangle">{{cn.d[0]}}, {{cn.d[1]}}, {{cn.d[2]}}, {{cn.d[3]}}, {{cn.d[4]}}, {{cn.d[5]}}, {{cn.d[6]}}</div>
+			</div>
+			<br>
+			<div>
+				<span id="regletter">F</span>
+				<div id="rectangle">{{cn.f}}</div>
+			</div>
+			<div>ZF: {{cn.zf}}  SF: {{cn.sf}}  OF: {{cn.of}}</div>
 		</div>
-		<br>
-		<div>
-			<span id="regletter">D</span>
-			<div id="rectangle">{{cn.d[0]}}, {{cn.d[1]}}, {{cn.d[2]}}, {{cn.d[3]}}, {{cn.d[4]}}, {{cn.d[5]}}, {{cn.d[6]}}</div>
-		</div>
-		<br>
-		<div>
-			<span id="regletter">F</span>
-			<div id="rectangle">{{cn.f}}</div>
-		</div>
-		<div>ZF: {{cn.zf}}  SF: {{cn.sf}}  OF: {{cn.of}}</div>
 	</div>
 	
-	<div style="width:50%;float:right">
-		<div class="registerBlock">
-			<div *ngIf="cn" id="registers">
-				<table>
-					<tr>
-						<td><b>%rax:</b> {{cn.genRegs[0]}}</td>
-						<td><b>%rcx:</b> {{cn.genRegs[1]}}</td>
-						<td><b>%rdx:</b> {{cn.genRegs[2]}}</td>
-						<td><b>%rbx:</b> {{cn.genRegs[3]}}</td>
-					</tr>
-					<tr>
-						<td><b>%rsp:</b> {{cn.genRegs[4]}}</td>
-						<td><b>%rbp:</b> {{cn.genRegs[5]}}</td>
-						<td><b>%rsi:</b> {{cn.genRegs[6]}}</td>
-						<td><b>%rdi:</b> {{cn.genRegs[7]}}</td>
-					</tr>
-					<tr>
-						<td><b>%r8:</b> {{cn.genRegs[8]}}</td>
-						<td><b>%r9:</b> {{cn.genRegs[9]}}</td>
-						<td><b>%r10:</b> {{cn.genRegs[10]}}</td>
-						<td><b>%r11:</b> {{cn.genRegs[11]}}</td>
-					</tr>
-					<tr>
-						<td><b>%r12:</b> {{cn.genRegs[12]}}</td>
-						<td><b>%r13:</b> {{cn.genRegs[13]}}</td>
-						<td><b>%r14:</b> {{cn.genRegs[14]}}</td>
-					</tr>
-				</table>
-			</div>
+	<div class="fRight">
+		<div *ngIf="cn" class="registers">
+			<table>
+				<tr>
+					<td><b>%rax:</b> {{cn.genRegs[0]}}</td>
+					<td><b>%rcx:</b> {{cn.genRegs[1]}}</td>
+					<td><b>%rdx:</b> {{cn.genRegs[2]}}</td>
+					<td><b>%rbx:</b> {{cn.genRegs[3]}}</td>
+				</tr>
+				<tr>
+					<td><b>%rsp:</b> {{cn.genRegs[4]}}</td>
+					<td><b>%rbp:</b> {{cn.genRegs[5]}}</td>
+					<td><b>%rsi:</b> {{cn.genRegs[6]}}</td>
+					<td><b>%rdi:</b> {{cn.genRegs[7]}}</td>
+				</tr>
+				<tr>
+					<td><b>%r8:</b> {{cn.genRegs[8]}}</td>
+					<td><b>%r9:</b> {{cn.genRegs[9]}}</td>
+					<td><b>%r10:</b> {{cn.genRegs[10]}}</td>
+					<td><b>%r11:</b> {{cn.genRegs[11]}}</td>
+				</tr>
+				<tr>
+					<td><b>%r12:</b> {{cn.genRegs[12]}}</td>
+					<td><b>%r13:</b> {{cn.genRegs[13]}}</td>
+					<td><b>%r14:</b> {{cn.genRegs[14]}}</td>
+				</tr>
+			</table>
 		</div>
 		
-		<div *ngIf="cn" class="memoryBlock">
-			<div id="memory"> 0x0000000a: 02934499</div>
+		<div *ngIf="cn" class="memory">
+			<table>
+				<tr *ngFor="#data of cn.mem">
+					<td><b>{{data[0]}}</b> {{data[1]}} {{data[2]}} {{data[3]}} {{data[4]}}</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>

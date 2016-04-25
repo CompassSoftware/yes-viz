@@ -16,6 +16,7 @@ export class ParserService {
 		this.fillW(arr[6]);
 		this.fillFlags(arr[8]);
 		this.fillGenRegs(arr[9], arr[10], arr[11], arr[12]);
+		this.fillMem(arr);
 		
 		return this.cn;
 	}
@@ -97,5 +98,15 @@ export class ParserService {
 		regs[12] = data4.substr(6, 16);
 		regs[13] = data4.substr(29, 16);
 		regs[14] = data4.substr(52, 16);
+	}
+	
+	private fillMem(data: string[]) {
+		var mem = this.cn.mem;
+		var index = 0;
+		for(var i = 14; i < data.length; i++) {
+			mem[index] = data[i].split(" ");
+			index++;
+		}
+		mem.pop();
 	}
 }

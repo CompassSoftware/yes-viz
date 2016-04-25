@@ -1,6 +1,5 @@
 #regletter {
-  position: relative;
-  bottom: 35px;
+	
 }
 
 #rectangle {
@@ -8,22 +7,6 @@
   width:90%;
   height:10%;
   border:1px solid #000;
-}
-
-#registers {
-    display:inline-block;
-    width: 90%;
-    height: 25%;
-    border:1px solid #000;
-
-}
-
-#memory {
-    display:inline-block;
-    width: 90%;
-    height: 25%;
-    border:1px solid #000;
-    
 }
 
 #header {
@@ -34,16 +17,34 @@
     padding:1%;
 }
 
-#verticalLine {
-    border-left: thick solid #ff0000;
+.registers {
+	
 }
 
-.memoryBlock {
-    margin-top:  5%;
+.memory {
+    margin-top:2em;
 }
 
-div.fullWidth {
+.diagram {
+	
+}
+
+.fullWidth {
     width:100%;
     height:100%;
     background-color:#CCC;
+}
+
+.fLeft {
+	width:50%;
+	float:left;
+}
+
+.fRight {
+	width:50%;
+	float:right;
+}
+
+button {
+	margin:10px 10px;
 }
