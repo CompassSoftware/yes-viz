@@ -1,9 +1,16 @@
 <div class="fullWidth">
 	<h1 align=left id="header">
-		YES Visual
-    <button (click)="prevListener()">Previous</button><button (click)="nextListener()">Next</button>
-		Upload file:
-		<input type=file (change)="changeListener($event)">
+		<div>YES Visual</div>
+		<div>
+			<button (click)="prevListener()">Previous</button>
+			<button (click)="runListener()">Run</button>
+			<button (click)="nextListener()">Next</button>
+			<button (click)="changeListener()">Change Dump File</button>
+		</div>
+		<div>
+			Upload your file: <input type=file (change)="userUploadListener($event)">
+			Upload correct file: <input type=file (change)="correctUploadListener($event)">
+		</div>
 	</h1>
 	
 	<div class="fLeft">
