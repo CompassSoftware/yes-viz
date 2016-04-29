@@ -12,8 +12,12 @@ import {ParserService} from "./parser.service";
 })
 export class AppComponent {
   public cn: CycleNode;
-  public linkedList: DoublyLinkedList;
+  public userList: DoublyLinkedList;
   public correctList: DoublyLinkedList;
+  public display: DoublyLInkedList;
+  public index: number;
+  public userLength: number;
+  public correctLength: number;
 	
 	constructor(private _fileManagerService: FileManagerService,
 				private _parserService: ParserService) {
@@ -23,13 +27,15 @@ export class AppComponent {
 		if($event.target.files.length != 0) {
 			this._fileManagerService.callback = () : void => {
 				var data: string;
-				this.linkedList = new DoublyLinkedList();
+				this.userList = new DoublyLinkedList();
 				while(this._fileManagerService.hasNextClock()) {
 					data = this._fileManagerService.getNextClock();
-					this.linkedList.insert(this._parserService.parse(data));
+					this.userList.insert(this._parserService.parse(data));
 				}
 				this.resetLists();
-				this.cn = this.linkedList.getCurrent();
+				this.userLength = this.userList.getLength()-1;
+				this.display = this.userList;
+				this.cn = this.userList.getCurrent();
 			};
 			this._fileManagerService.readFile($event.target.files[0]);
 		}
@@ -45,41 +51,75 @@ export class AppComponent {
 					this.correctList.insert(this._parserService.parse(data));
 				}
 				this.resetLists();
+				this.correctLength = this.correctList.getLength()-1;
 			};
 			this._fileManagerService.readFile($event.target.files[0]);
 		}
 	}
 
 	nextListener() {
-		if(this.linkedList != null)
-			if(this.linkedList.next())
-				this.cn = this.linkedList.getCurrent();
-		if(this.correctList != null) this.correctList.next();
+		var gotNext = false;
+		if(this.userList != null && this.index < this.userLength) {
+			this.userList.next();
+			gotNext = true;
+		}
+		if(this.correctList != null && this.index < this.correctLength) {
+			this.correctList.next();
+			gotNext = true;
+		}
+		if(gotNext) {
+			this.index++;
+			this.cn = this.display.getCurrent();
+		}
 	}
 	
 	prevListener() {
-		if(this.linkedList != null)
-			if(this.linkedList.previous())
-				this.cn = this.linkedList.getCurrent();
-		if(this.correctList != null) this.correctList.previous();
+		if(this.index > 0) {
+			var gotPrev = false;
+			if(this.userList != null && this.index <= this.userLength) {
+				this.userList.previous();
+				gotPrev = true;
+			}
+			if(this.correctList != null && this.index <= this.correctLength) {
+				this.correctList.previous();
+				gotPrev = true;
+			}
+			if(gotPrev) {
+				this.index--;
+				this.cn = this.display.getCurrent();
+			}
+		}
+	}
+	
+	resetLists() {
+		if(this.correctList != null) {
+			this.correctList.reset();
+			this.display = this.correctList;
+		}
+		if(this.userList != null) {
+			this.userList.reset();
+			this.display = this.userList;
+		}
+		this.cn = this.display.getCurrent();
+		this.index = 0;
 	}
 	
 	runListener() {
-		if(this.linkedList != null && this.correctList != null) {
-			do {
+		if(this.userList != null && this.correctList != null) {
+			do 
 				if(!this.compare()) return;
-			} while(this.linkedList.next() && this.correctList.next());
-			this.cn = this.linkedList.getCurrent();
+			} while(this.userList.next() && this.correctList.next());
+			this.cn = this.display.getCurrent();
 		}
 	}
 	
-	public resetLists() {
-		if(this.linkedList != null) {
-			this.linkedList.reset();
-			this.cn = this.linkedList.getCurrent();
-		}
-		if(this.correctList != null) this.correctList.reset();
+	changeListener() {
+		if(this.display == this.userList && this.correctList != null) {
+			this.display = this.correctList;
+			this.cn = this.display.getCurrent();
 	}
+	
+	
 	
 	public compare(): boolean {
 		//TODO: Compare the two currents, update view, return true if identical, false if different
