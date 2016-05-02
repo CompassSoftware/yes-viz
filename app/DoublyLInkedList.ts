@@ -55,14 +55,17 @@ export class DoublyLinkedList {
 	* 
 	* @return boolean - true if current was set to the next node in the list.
     */
-	public next():boolean
+	public next()
 	{
 		if (this.cursor.next != null)
 		{
 			this.cursor = this.cursor.next;
-			return true;
 		}
-		return false;
+	}
+	
+	public hasNext(): boolean {
+		if (this.cursor.next != null) return true;
+		else return false;
 	}
 	
 	
@@ -73,15 +76,18 @@ export class DoublyLinkedList {
 	*
 	* @return boolean - true if current is set to previous
 	*/
-	public previous():boolean
+	public previous()
 	{
 		if (this.cursor.previous != null && this.cursor != this.head)
 		{
 			this.cursor = this.cursor.previous;
-			return true;
 		}
-		return false;
     }
+	
+	public hasPrevious(): boolean {
+		if (this.cursor.previous != null && this.cursor != this.head) return true;
+		else return false;
+	}
 	
 	/*
 	* getCurrent

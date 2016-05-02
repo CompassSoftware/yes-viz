@@ -14,7 +14,7 @@ export class AppComponent {
   public cn: CycleNode;
   public userList: DoublyLinkedList;
   public correctList: DoublyLinkedList;
-  public display: DoublyLInkedList;
+  public display: DoublyLinkedList;
   public index: number;
   public userLength: number;
   public correctLength: number;
@@ -34,8 +34,6 @@ export class AppComponent {
 				}
 				this.resetLists();
 				this.userLength = this.userList.getLength()-1;
-				this.display = this.userList;
-				this.cn = this.userList.getCurrent();
 			};
 			this._fileManagerService.readFile($event.target.files[0]);
 		}
@@ -70,6 +68,7 @@ export class AppComponent {
 		if(gotNext) {
 			this.index++;
 			this.cn = this.display.getCurrent();
+			if(this.userList != null && this.correctList != null) this.compare();
 		}
 	}
 	
@@ -87,6 +86,7 @@ export class AppComponent {
 			if(gotPrev) {
 				this.index--;
 				this.cn = this.display.getCurrent();
+				if(this.userList != null && this.correctList != null) this.compare();
 			}
 		}
 	}
@@ -106,23 +106,32 @@ export class AppComponent {
 	
 	runListener() {
 		if(this.userList != null && this.correctList != null) {
-			do 
-				if(!this.compare()) return;
-			} while(this.userList.next() && this.correctList.next());
+			do {
+				if(!this.compare()) break;
+				if(this.userList.hasNext() || this.correctList.hasNext()) {
+					this.userList.next();
+					this.correctList.next();
+					this.index++;
+				}
+			} while(true);
 			this.cn = this.display.getCurrent();
 		}
 	}
 	
 	changeListener() {
-		if(this.display == this.userList && this.correctList != null) {
+		if(this.display == this.userList && this.correctList != null)
 			this.display = this.correctList;
-			this.cn = this.display.getCurrent();
+		else if(this.display == this.correctList && this.userList != null)
+			this.display = this.userList;
+		this.cn = this.display.getCurrent();
 	}
 	
 	
 	
 	public compare(): boolean {
-		//TODO: Compare the two currents, update view, return true if identical, false if different
-		return true;
+		var cn1 = this.userList.getCurrent();
+		var cn2 = this.correctList.getCurrent();
+		if(cn1.cycleNum != cn2.cycleNum) return false;
+		else return true;
 	}
 }
