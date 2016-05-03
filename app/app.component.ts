@@ -4,6 +4,10 @@ import {DoublyLinkedList} from "./DoublyLInkedList";
 import {FileManagerService} from "./file-manager.service";
 import {ParserService} from "./parser.service";
 
+enum Views {
+	CycleNum
+}
+
 @Component({
 	selector: "my-app",
 	templateUrl: "app/app.component.html",
@@ -11,16 +15,19 @@ import {ParserService} from "./parser.service";
 	providers: [FileManagerService, ParserService]
 })
 export class AppComponent {
-  public cn: CycleNode;
-  public userList: DoublyLinkedList;
-  public correctList: DoublyLinkedList;
-  public display: DoublyLinkedList;
-  public index: number;
-  public userLength: number;
-  public correctLength: number;
+	public cn: CycleNode;
+	public userList: DoublyLinkedList;
+	public correctList: DoublyLinkedList;
+	public display: DoublyLinkedList;
+	public index: number;
+	public userLength: number;
+	public correctLength: number;
+	public isRed: boolean[];
+	public views = Views;
 	
 	constructor(private _fileManagerService: FileManagerService,
 				private _parserService: ParserService) {
+		this.isRed = [];
     }
 	
 	userUploadListener($event) {
@@ -128,10 +135,18 @@ export class AppComponent {
 	
 	
 	
-	public compare(): boolean {
+	private compare(): boolean {
+		this.clearReds();
 		var cn1 = this.userList.getCurrent();
 		var cn2 = this.correctList.getCurrent();
-		if(cn1.cycleNum != cn2.cycleNum) return false;
+		if(cn1.cycleNum != cn2.cycleNum) {
+			this.isRed[this.views.CycleNum] = true;
+			return false;
+		}
 		else return true;
+	}
+	
+	private clearReds() {
+		for(var i = 0; i < this.isRed.length; i++) this.isRed[i] = false;
 	}
 }
