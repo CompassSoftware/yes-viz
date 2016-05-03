@@ -5,7 +5,11 @@ import {FileManagerService} from "./file-manager.service";
 import {ParserService} from "./parser.service";
 
 enum Views {
-	CycleNum
+CycleNum, wstat, wicode, wvale, wvalm, wdste, wdstm,
+mstat, micode, mcnd, mvale, mvala, mdste, mdstm,
+estat, eicode, eifun, evalc, evala, evalb, edste, edstm, esrca, esrcb,
+dstat, dicode, difun, dra, drb, dvalc, dvalp, 
+fpredpc
 }
 
 @Component({
