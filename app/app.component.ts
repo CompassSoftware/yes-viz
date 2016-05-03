@@ -18,6 +18,7 @@ export class AppComponent {
   public index: number;
   public userLength: number;
   public correctLength: number;
+  public viewName: string;
 	
 	constructor(private _fileManagerService: FileManagerService,
 				private _parserService: ParserService) {
@@ -119,10 +120,14 @@ export class AppComponent {
 	}
 	
 	changeListener() {
-		if(this.display == this.userList && this.correctList != null)
-			this.display = this.correctList;
-		else if(this.display == this.correctList && this.userList != null)
-			this.display = this.userList;
+  if(this.display == this.userList && this.correctList != null) {
+    this.display = this.correctList;
+    this.viewName = "Correct File";
+    }
+    else if(this.display == this.correctList && this.userList != null) {
+    this.display = this.userList;
+    this.viewName = "Your File";
+    }
 		this.cn = this.display.getCurrent();
 	}
 	
