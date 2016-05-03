@@ -5,7 +5,7 @@ import {FileManagerService} from "./file-manager.service";
 import {ParserService} from "./parser.service";
 
 enum Views {
-	CycleNum
+	cyclenum, 
 }
 
 @Component({
@@ -146,11 +146,104 @@ export class AppComponent {
 		this.clearReds();
 		var cn1 = this.userList.getCurrent();
 		var cn2 = this.correctList.getCurrent();
+		var isDifferent = false;
 		if(cn1.cycleNum != cn2.cycleNum) {
-			this.isRed[this.views.CycleNum] = true;
+			this.isRed[this.views.cyclenum] = true;
 			return false;
 		}
-		else return true;
+		if(cn1.w[0] != cn2.w[0]) {
+			this.isRed[this.views.wstat] = true;
+			isDifferent = true;
+		}
+		if(cn1.w[1] != cn2.w[1]) {
+			this.isRed[this.views.wicode] = true;
+			isDifferent = true;
+		}
+		if(cn1.w[2] != cn2.w[2]) {
+			this.isRed[this.views.wvale] = true;
+			isDifferent = true;
+		}
+		if(cn1.w[3] != cn2.w[3]) {
+			this.isRed[this.views.wvalm] = true;
+			isDifferent = true;
+		}
+		if(cn1.w[4] != cn2.w[4]) {
+			this.isRed[this.views.wdste] = true;
+			isDifferent = true;
+		}
+		if(cn1.w[5] != cn2.w[5]) {
+			this.isRed[this.views.wdstm] = true;
+			isDifferent = true;
+		}
+		if(cn1.m[0] != cn2.m[0]) {
+			this.isRed[this.views.mstat] = true;
+			isDifferent = true;
+		}
+		if(cn1.m[1] != cn2.m[1]) {
+			this.isRed[this.views.micode] = true;
+			isDifferent = true;
+		}
+		if(cn1.m[2] != cn2.m[2]) {
+			this.isRed[this.views.mcnd] = true;
+			isDifferent = true;
+		}
+		if(cn1.m[3] != cn2.m[3]) {
+			this.isRed[this.views.mvale] = true;
+			isDifferent = true;
+		}
+		if(cn1.m[4] != cn2.m[4]) {
+			this.isRed[this.views.mvala] = true;
+			isDifferent = true;
+		}
+		if(cn1.m[5] != cn2.m[5]) {
+			this.isRed[this.views.mdste] = true;
+			isDifferent = true;
+		}
+		if(cn1.m[6] != cn2.m[6]) {
+			this.isRed[this.views.mdstm] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[0] != cn2.e[0]) {
+			this.isRed[this.views.estat] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[1] != cn2.e[1]) {
+			this.isRed[this.views.eicode] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[2] != cn2.e[2]) {
+			this.isRed[this.views.eifun] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[3] != cn2.e[3]) {
+			this.isRed[this.views.evalc] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[4] != cn2.e[4]) {
+			this.isRed[this.views.evala] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[5] != cn2.e[5]) {
+			this.isRed[this.views.evalb] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[6] != cn2.e[6]) {
+			this.isRed[this.views.edste] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[7] != cn2.e[7]) {
+			this.isRed[this.views.edstm] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[8] != cn2.e[8]) {
+			this.isRed[this.views.srca] = true;
+			isDifferent = true;
+		}
+		if(cn1.e[9] != cn2.e[9]) {
+			this.isRed[this.views.esrcb] = true;
+			isDifferent = true;
+		}
+		return !isDifferent;
 	}
 	
 	private clearReds() {
