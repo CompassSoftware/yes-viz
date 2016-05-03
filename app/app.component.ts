@@ -5,7 +5,11 @@ import {FileManagerService} from "./file-manager.service";
 import {ParserService} from "./parser.service";
 
 enum Views {
-	cyclenum, 
+	cyclenum, wstat, wicode, wvale, wvalm, wdste, wdstm,
+	mstat, micode, mcnd, mvale, mvala, mdste, mdstm,
+	estat, eicode, eifun, evalc, evala, evalb, edste, edstm, esrca, esrcb,
+	dstat, dicode, difun, dra, drb, dvalc, dvalp, 
+	fpredpc
 }
 
 @Component({
@@ -236,7 +240,7 @@ export class AppComponent {
 			isDifferent = true;
 		}
 		if(cn1.e[8] != cn2.e[8]) {
-			this.isRed[this.views.srca] = true;
+			this.isRed[this.views.esrca] = true;
 			isDifferent = true;
 		}
 		if(cn1.e[9] != cn2.e[9]) {
