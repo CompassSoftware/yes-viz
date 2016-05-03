@@ -1,11 +1,11 @@
 <div class="fullWidth">
 	<h1 align=left id="header">
-		<div>YES Visual</div>
+		<div>YESS Visual</div>
 		<div>
 			<button (click)="prevListener()">Previous</button>
 			<button (click)="runListener()">Run</button>
 			<button (click)="nextListener()">Next</button>
-			<button (click)="changeListener()">Change Dump File</button>
+      <button (click)="changeListener()">Change Dump File</button>  View: {{viewName}}
 		</div>
 		<div>
 			Upload your file: <input type=file (change)="userUploadListener($event)">
@@ -17,33 +17,33 @@
 		<div *ngIf="cn" class="diagram">
 			<span [class.red]="isRed[views.CycleNum]">Cycle Number {{cn.cycleNum}}</span>
 			<div>
-				<span id="regletter">W</span>
-				<div id="rectangle">{{cn.w[0]}}, {{cn.w[1]}}, {{cn.w[2]}}, {{cn.w[3]}}, {{cn.w[4]}}, {{cn.w[5]}}</div>
+        <span id="regletter"><b>W</b></span>
+        <div id="rectangle"><b> stat:</b> {{cn.w[0]}}, <b> icode:</b> {{cn.w[1]}}, <b> valE:</b> {{cn.w[2]}}, <b> valM:</b> {{cn.w[3]}}, <b> dstE:</b> {{cn.w[4]}}, <b> dstM:</b> {{cn.w[5]}}</div>
 			</div>
 			<br>
 			<div>
-				<span id="regletter">M</span>
-				<div id="rectangle">{{cn.m[0]}}, {{cn.m[1]}}, {{cn.m[2]}}, {{cn.m[3]}}, {{cn.m[4]}}, {{cn.m[5]}}, {{cn.m[6]}}</div>
+        <span id="regletter"><b>M</b></span>
+        <div id="rectangle"><b> stat:</b> {{cn.m[0]}}, <b> icode:</b> {{cn.m[1]}}, <b> Cnd:</b> {{cn.m[2]}}, <b> valE:</b> {{cn.m[3]}}, <b> valA:</b> {{cn.m[4]}}, <b> dstE:</b> {{cn.m[5]}}, <b> dstM:</b> {{cn.m[6]}}</div>
 			</div>
 			<br>
 			<div>
-				<span id="regletter">E</span>
+        <span id="regletter"><b>E</b></span>
 				<div id="rectangle">
-					{{cn.e[0]}}, {{cn.e[1]}}, {{cn.e[2]}}, {{cn.e[3]}}, {{cn.e[4]}}<br>
-					{{cn.e[5]}}, {{cn.e[6]}}, {{cn.e[7]}}, {{cn.e[8]}}, {{cn.e[9]}}
+          <b> stat:</b> {{cn.e[0]}}, <b> icode:</b> {{cn.e[1]}}, <b> ifun:</b> {{cn.e[2]}}, <b> valC:</b> {{cn.e[3]}}, <b> valA:</b> {{cn.e[4]}}<br>
+          <b> valB:</b> {{cn.e[5]}}, <b> dstE:</b> {{cn.e[6]}}, <b> dstM:</b> {{cn.e[7]}}, <b> srcA:</b> {{cn.e[8]}}, <b> srcB:</b> {{cn.e[9]}}
 				</div>
 			</div>
 			<br>
 			<div>
-				<span id="regletter">D</span>
-				<div id="rectangle">{{cn.d[0]}}, {{cn.d[1]}}, {{cn.d[2]}}, {{cn.d[3]}}, {{cn.d[4]}}, {{cn.d[5]}}, {{cn.d[6]}}</div>
+        <span id="regletter"><b>D</b></span>
+        <div id="rectangle"><b>stat:</b> {{cn.d[0]}}, <b> icode:</b> {{cn.d[1]}}, <b> ifun:</b> {{cn.d[2]}}, <b> rA:</b> {{cn.d[3]}}, <b> rB:</b> {{cn.d[4]}}, <b> valC:</b> {{cn.d[5]}}, <b> valP:</b> {{cn.d[6]}}</div>
 			</div>
 			<br>
 			<div>
-				<span id="regletter">F</span>
-				<div id="rectangle">{{cn.f}}</div>
+        <span id="regletter"><b>F</b></span>
+        <div id="rectangle"><b>predPC:</b> {{cn.f}}</div>
 			</div>
-			<div>ZF: {{cn.zf}}  SF: {{cn.sf}}  OF: {{cn.of}}</div>
+      <div><b>Conditional Flags </b><b> ZF:</b> {{cn.zf}}  <b> SF:</b> {{cn.sf}}  <b> OF:</b> {{cn.of}}</div>
 		</div>
 	</div>
 	
@@ -85,3 +85,4 @@
 		</div>
 	</div>
 </div>
+

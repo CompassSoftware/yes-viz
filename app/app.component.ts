@@ -23,6 +23,7 @@ export class AppComponent {
 	public userLength: number;
 	public correctLength: number;
 	public isRed: boolean[];
+    public viewName: string;
 	public views = Views;
 	
 	constructor(private _fileManagerService: FileManagerService,
@@ -102,10 +103,12 @@ export class AppComponent {
 		if(this.correctList != null) {
 			this.correctList.reset();
 			this.display = this.correctList;
+			this.viewName = "Correct File";
 		}
 		if(this.userList != null) {
 			this.userList.reset();
 			this.display = this.userList;
+			this.viewName = "Your File";
 		}
 		this.cn = this.display.getCurrent();
 		this.index = 0;
@@ -126,10 +129,14 @@ export class AppComponent {
 	}
 	
 	changeListener() {
-		if(this.display == this.userList && this.correctList != null)
+		if(this.display == this.userList && this.correctList != null) {
 			this.display = this.correctList;
-		else if(this.display == this.correctList && this.userList != null)
+			this.viewName = "Correct File";
+		}
+		else if(this.display == this.correctList && this.userList != null) {
 			this.display = this.userList;
+			this.viewName = "Your File";
+		}
 		this.cn = this.display.getCurrent();
 	}
 	
