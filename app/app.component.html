@@ -5,11 +5,11 @@
 			<button (click)="prevListener()">Previous</button>
 			<button (click)="runListener()">Run</button>
 			<button (click)="nextListener()">Next</button>
-      <button (click)="changeListener()">Change Dump File</button>  View: <h3>{{viewName}}</h3>
+      <button (click)="changeListener()">Change Dump File</button>  <font size = "5">View:</font> <font size="4">{{viewName}}</font>
 		</div>
 		<div>
-			Upload your file: <input type=file (change)="userUploadListener($event)">
-			Upload correct file: <input type=file (change)="correctUploadListener($event)">
+      <font size="5">Upload your file:</font> <input type=file (change)="userUploadListener($event)">
+      <font size="5">Upload correct file:</font> <input type=file (change)="correctUploadListener($event)">
 		</div>
 	</h1>
 	
