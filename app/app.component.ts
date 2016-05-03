@@ -116,17 +116,18 @@ export class AppComponent {
 		}
 		this.cn = this.display.getCurrent();
 		this.index = 0;
+		if(this.userList != null && this.correctList != null) this.compare();
 	}
 	
 	runListener() {
 		if(this.userList != null && this.correctList != null) {
 			do {
 				if(!this.compare()) break;
-				if(this.userList.hasNext() || this.correctList.hasNext()) {
+				else if(this.userList.hasNext() || this.correctList.hasNext()) {
 					this.userList.next();
 					this.correctList.next();
 					this.index++;
-				}
+				} else break;
 			} while(true);
 			this.cn = this.display.getCurrent();
 		}
