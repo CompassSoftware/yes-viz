@@ -1,11 +1,11 @@
 <div class="fullWidth">
 	<h1 align=left id="header">
-		<div>YESS Visual</div>
+    <div><center>YESS Visual</center></div>
 		<div>
 			<button (click)="prevListener()">Previous</button>
 			<button (click)="runListener()">Run</button>
 			<button (click)="nextListener()">Next</button>
-      <button (click)="changeListener()">Change Dump File</button>  View: {{viewName}}
+      <button (click)="changeListener()">Change Dump File</button>  View: <h3>{{viewName}}</h3>
 		</div>
 		<div>
 			Upload your file: <input type=file (change)="userUploadListener($event)">
@@ -18,32 +18,32 @@
 			<span [class.red]="isRed[views.CycleNum]">Cycle Number {{cn.cycleNum}}</span>
 			<div>
         <span id="regletter"><b>W</b></span>
-        <div id="rectangle"><b> stat:</b> {{cn.w[0]}}, <b> icode:</b> {{cn.w[1]}}, <b> valE:</b> {{cn.w[2]}}, <b> valM:</b> {{cn.w[3]}}, <b> dstE:</b> {{cn.w[4]}}, <b> dstM:</b> {{cn.w[5]}}</div>
+        <div id="rectangle"><b> stat:</b> <span [class.red]="isRed[views.wstat]">{{cn.w[0]}}</span>, <b> icode:</b> <span [class.red]="isRed[views.wicode]">{{cn.w[1]}}</span>, <b> valE:</b> <span [class.red]="isRed[views.wvale]">{{cn.w[2]}}</span>, <b> valM:</b> <span [class.red]="isRed[views.wvalm]">{{cn.w[3]}}</span>, <b> dstE:</b> <span [class.red]="isRed[views.wdste]">{{cn.w[4]}}</span>, <b> dstM:</b> <span [class.red]="isRed[views.wdstm]">{{cn.w[5]}}</span></div>
 			</div>
 			<br>
 			<div>
         <span id="regletter"><b>M</b></span>
-        <div id="rectangle"><b> stat:</b> {{cn.m[0]}}, <b> icode:</b> {{cn.m[1]}}, <b> Cnd:</b> {{cn.m[2]}}, <b> valE:</b> {{cn.m[3]}}, <b> valA:</b> {{cn.m[4]}}, <b> dstE:</b> {{cn.m[5]}}, <b> dstM:</b> {{cn.m[6]}}</div>
+        <div id="rectangle"><b> stat:</b> <span [class.red]="isRed[views.mstat]">{{cn.m[0]}}</span>, <b> icode:</b> <span [class.red]="isRed[views.micode]">{{cn.m[1]}}</span>, <b> Cnd:</b> <span [class.red]="isRed[views.mcnd]">{{cn.m[2]}}</span>, <b> valE:</b> <span [class.red]="isRed[views.mvale]">{{cn.m[3]}}</span>, <b> valA:</b> <span [class.red]="isRed[views.mvala]">{{cn.m[4]}}</span>, <b> dstE:</b> <span [class.red]="isRed[views.mdste]">{{cn.m[5]}}</span>, <b> dstM:</b> <span [class.red]="isRed[views.mdstm]">{{cn.m[6]}}</span></div>
 			</div>
 			<br>
 			<div>
         <span id="regletter"><b>E</b></span>
 				<div id="rectangle">
-          <b> stat:</b> {{cn.e[0]}}, <b> icode:</b> {{cn.e[1]}}, <b> ifun:</b> {{cn.e[2]}}, <b> valC:</b> {{cn.e[3]}}, <b> valA:</b> {{cn.e[4]}}<br>
-          <b> valB:</b> {{cn.e[5]}}, <b> dstE:</b> {{cn.e[6]}}, <b> dstM:</b> {{cn.e[7]}}, <b> srcA:</b> {{cn.e[8]}}, <b> srcB:</b> {{cn.e[9]}}
+          <b> stat:</b> <span [class.red]="isRed[views.estat]">{{cn.e[0]}}</span>, <b> icode:</b> <span [class.red]="isRed[views.eicode]">{{cn.e[1]}}</span>, <b> ifun:</b> <span [class.red]="isRed[views.eifun]">{{cn.e[2]}}</span>, <b> valC:</b> <span [class.red]="isRed[views.evalc]">{{cn.e[3]}}</span>, <b> valA:</b> <span [class.red]="isRed[views.evala]">{{cn.e[4]}}</span><br>
+          <b> valB:</b> <span [class.red]="isRed[views.evalb]">{{cn.e[5]}}</span>, <b> dstE:</b> <span [class.red]="isRed[views.edste]">{{cn.e[6]}}</span>, <b> dstM:</b> <span [class.red]="isRed[views.edstm]">{{cn.e[7]}}</span>, <b> srcA:</b> <span [class.red]="isRed[views.esrca]">{{cn.e[8]}}</span>, <b> srcB:</b> <span [class.red]="isRed[views.esrcb]">{{cn.e[9]}}</span>
 				</div>
 			</div>
 			<br>
 			<div>
         <span id="regletter"><b>D</b></span>
-        <div id="rectangle"><b>stat:</b> {{cn.d[0]}}, <b> icode:</b> {{cn.d[1]}}, <b> ifun:</b> {{cn.d[2]}}, <b> rA:</b> {{cn.d[3]}}, <b> rB:</b> {{cn.d[4]}}, <b> valC:</b> {{cn.d[5]}}, <b> valP:</b> {{cn.d[6]}}</div>
+        <div id="rectangle"><b>stat:</b> <span [class.red]="isRed[views.dstat]">{{cn.d[0]}}</span>, <b> icode:</b> <span [class.red]="isRed[views.dicode]">{{cn.d[1]}}</span>, <b> ifun:</b> <span [class.red]="isRed[views.difun]">{{cn.d[2]}}</span>, <b> rA:</b> <span [class.red]="isRed[views.dra]">{{cn.d[3]}}</span>, <b> rB:</b> <span [class.red]="isRed[views.drb]">{{cn.d[4]}}</span>, <b> valC:</b> <span [class.red]="isRed[views.dvalc]">{{cn.d[5]}}</span>, <b> valP:</b> <span [class.red]="isRed[views.dvalp]">{{cn.d[6]}}</span></div>
 			</div>
 			<br>
 			<div>
         <span id="regletter"><b>F</b></span>
-        <div id="rectangle"><b>predPC:</b> {{cn.f}}</div>
+        <div id="rectangle"><b>predPC:</b> <span [class.red]="isRed[views.fpredpc]">{{cn.f}}</span></div>
 			</div>
-      <div><b>Conditional Flags </b><b> ZF:</b> {{cn.zf}}  <b> SF:</b> {{cn.sf}}  <b> OF:</b> {{cn.of}}</div>
+      <div><b>Conditional Flags </b><b> ZF:</b> <span [class.red]="isRed[views.zflag]">{{cn.zf}}</span>  <b> SF:</b> <span [class.red]="isRed[views.sflag]">{{cn.sf}}</span>  <b> OF:</b> <span [class.red]="isRed[views.oflag]">{{cn.of}}</span></div>
 		</div>
 	</div>
 	
