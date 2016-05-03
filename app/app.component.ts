@@ -248,6 +248,11 @@ export class AppComponent {
 			this.isRed[this.views.esrcb] = true;
 			isDifferent = true;
 		}
+		if(cn1. != cn2.) {
+			this.isRed[this.views.] = true;
+			isDifferent = true;
+		}
+		stat, icode, ifun, rA, rB, valC, valP
 		return !isDifferent;
 	}
 	

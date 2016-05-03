@@ -5,7 +5,7 @@
 #rectangle {
   display:inline-block;
   width:90%;
-  height:10%;
+  height:5%;
   border:1px solid #000;
 }
 
@@ -29,8 +29,9 @@
     margin-top:2em;
 }
 
-.diagram {
-	
+.pipeline * {
+	padding-left: .25em;
+	padding-right: .25em;
 }
 
 .fullWidth {
