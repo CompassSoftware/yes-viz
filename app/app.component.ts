@@ -9,7 +9,8 @@ enum Views {
 	mstat, micode, mcnd, mvale, mvala, mdste, mdstm,
 	estat, eicode, eifun, evalc, evala, evalb, edste, edstm, esrca, esrcb,
 	dstat, dicode, difun, dra, drb, dvalc, dvalp, 
-	fpredpc
+	fpredpc,
+	zflag, sflag, oflag
 }
 
 @Component({
@@ -27,12 +28,14 @@ export class AppComponent {
 	public userLength: number;
 	public correctLength: number;
 	public isRed: boolean[];
+	public memRed: boolean[][];
     public viewName: string;
 	public views = Views;
 	
 	constructor(private _fileManagerService: FileManagerService,
 				private _parserService: ParserService) {
 		this.isRed = [];
+		this.memRed = [];
     }
 	
 	userUploadListener($event) {
@@ -79,7 +82,7 @@ export class AppComponent {
 		}
 		if(gotNext) {
 			this.index++;
-			this.cn = this.display.getCurrent();
+			this.updateCN();
 			if(this.userList != null && this.correctList != null) this.compare();
 		}
 	}
@@ -97,7 +100,7 @@ export class AppComponent {
 			}
 			if(gotPrev) {
 				this.index--;
-				this.cn = this.display.getCurrent();
+				this.updateCN();
 				if(this.userList != null && this.correctList != null) this.compare();
 			}
 		}
@@ -114,7 +117,7 @@ export class AppComponent {
 			this.display = this.userList;
 			this.viewName = "Your File";
 		}
-		this.cn = this.display.getCurrent();
+		this.updateCN();
 		this.index = 0;
 		if(this.userList != null && this.correctList != null) this.compare();
 	}
@@ -142,7 +145,8 @@ export class AppComponent {
 			this.display = this.userList;
 			this.viewName = "Your File";
 		}
-		this.cn = this.display.getCurrent();
+		this.updateCN();
+		if(this.userList != null && this.correctList != null) this.compare();
 	}
 	
 	
@@ -152,10 +156,12 @@ export class AppComponent {
 		var cn1 = this.userList.getCurrent();
 		var cn2 = this.correctList.getCurrent();
 		var isDifferent = false;
+		
 		if(cn1.cycleNum != cn2.cycleNum) {
 			this.isRed[this.views.cyclenum] = true;
 			return false;
 		}
+		
 		if(cn1.w[0] != cn2.w[0]) {
 			this.isRed[this.views.wstat] = true;
 			isDifferent = true;
@@ -180,6 +186,7 @@ export class AppComponent {
 			this.isRed[this.views.wdstm] = true;
 			isDifferent = true;
 		}
+		
 		if(cn1.m[0] != cn2.m[0]) {
 			this.isRed[this.views.mstat] = true;
 			isDifferent = true;
@@ -208,6 +215,7 @@ export class AppComponent {
 			this.isRed[this.views.mdstm] = true;
 			isDifferent = true;
 		}
+		
 		if(cn1.e[0] != cn2.e[0]) {
 			this.isRed[this.views.estat] = true;
 			isDifferent = true;
@@ -248,15 +256,105 @@ export class AppComponent {
 			this.isRed[this.views.esrcb] = true;
 			isDifferent = true;
 		}
-		if(cn1. != cn2.) {
-			this.isRed[this.views.] = true;
+		
+		if(cn1.d[0] != cn2.d[0]) {
+			this.isRed[this.views.dstat] = true;
 			isDifferent = true;
 		}
-		stat, icode, ifun, rA, rB, valC, valP
+		if(cn1.d[1] != cn2.d[1]) {
+			this.isRed[this.views.dicode] = true;
+			isDifferent = true;
+		}
+		if(cn1.d[2] != cn2.d[2]) {
+			this.isRed[this.views.difun] = true;
+			isDifferent = true;
+		}
+		if(cn1.d[3] != cn2.d[3]) {
+			this.isRed[this.views.dra] = true;
+			isDifferent = true;
+		}
+		if(cn1.d[4] != cn2.d[4]) {
+			this.isRed[this.views.drb] = true;
+			isDifferent = true;
+		}
+		if(cn1.d[5] != cn2.d[5]) {
+			this.isRed[this.views.dvalc] = true;
+			isDifferent = true;
+		}
+		if(cn1.d[6] != cn2.d[6]) {
+			this.isRed[this.views.dvalp] = true;
+			isDifferent = true;
+		}
+		
+		if(cn1.f != cn2.f) {
+			this.isRed[this.views.fpredpc] = true;
+			isDifferent = true;
+		}
+		
+		if(cn1.zf != cn2.zf) {
+			this.isRed[this.views.zflag] = true;
+			isDifferent = true;
+		}
+		if(cn1.sf != cn2.sf) {
+			this.isRed[this.views.sflag] = true;
+			isDifferent = true;
+		}
+		if(cn1.of != cn2.of) {
+			this.isRed[this.views.oflag] = true;
+			isDifferent = true;
+		}
+		
+		for(var i = 0; i < Math.min(cn1.mem.length, cn2.mem.length); i++) {
+			if(cn1.mem[i][0] != cn2.mem[i][0]) {
+				this.memRed[i][0] = true;
+				isDifferent = true;
+			}
+			if(cn1.mem[i][1] != cn2.mem[i][1]) {
+				this.memRed[i][1] = true;
+				isDifferent = true;
+			}
+			if(cn1.mem[i][2] != cn2.mem[i][2]) {
+				this.memRed[i][2] = true;
+				isDifferent = true;
+			}
+			if(cn1.mem[i][3] != cn2.mem[i][3]) {
+				this.memRed[i][3] = true;
+				isDifferent = true;
+			}
+			if(cn1.mem[i][4] != cn2.mem[i][4]) {
+				this.memRed[i][4] = true;
+				isDifferent = true;
+			}
+		}
+		if(cn1.mem.length != cn2.mem.length) {
+			isDifferent = true;
+			var shorter: CycleNode;
+			var longer: CycleNode;
+			if(cn1.mem.length < cn2.mem.length) {
+				shorter = cn1;
+				longer = cn2;
+			} else {
+				shorter = cn2;
+				longer = cn1;
+			}
+			for(var i = shorter.mem.length; i < longer.mem.length; i++)	this.memRed[i][0] = true;
+		}
+		
 		return !isDifferent;
 	}
 	
 	private clearReds() {
-		for(var i = 0; i < this.isRed.length; i++) this.isRed[i] = false;
+		this.isRed = [];
+		this.memRed = [];
+	}
+	
+	private updateCN() {
+		var cn = this.display.getCurrent();
+		this.fixMemRedSize(cn.mem.length);
+		this.cn = cn;
+	}
+
+	private fixMemRedSize(n: number) {
+		for(var i = 0; i < n; i++) this.memRed[i] = [];
 	}
 }
