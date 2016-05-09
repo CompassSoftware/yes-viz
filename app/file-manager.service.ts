@@ -6,6 +6,13 @@ export class FileManagerService {
 	private index = 0;
 	public callback: Function;
 	
+	/**
+	 * readFile
+	 * 
+	 * Creates a new FileReader to read from the inputted file.
+	 * 
+	 * @param file: File - the file to be read.
+	 */
 	readFile(file: File) {
 		var fr = new FileReader();
 		var self = this;
@@ -16,16 +23,34 @@ export class FileManagerService {
 		fr.readAsText(file);
 	}
 	
+	/**
+	 * getFileData
+	 * 
+	 * Accessor method for the file data.
+	 * 
+	 * @param data: String
+	 * @param self: FileMangerService
+	 */
 	getFileData(data: string, self: FileManagerService) {
 		self.data = data.split("\nAt end of cycle ");
 		self.index = 1;
 		if(self.callback != null) self.callback();
 	}
 	
+	/**
+	 * getNextClock
+	 * 
+	 * This method will get the data for the next clock and increase index by 1.
+	 */
 	getNextClock() {
 		return this.data[this.index++];
 	}
 	
+	/**
+	 * hasNextClock
+	 * 
+	 * This methods returns if there is a next index in data.
+	 */
 	hasNextClock() {
 		return this.index < this.data.length ? true : false;
 	}
