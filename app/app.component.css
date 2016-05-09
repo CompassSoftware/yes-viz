@@ -17,6 +17,15 @@
     padding:1%;
 }
 
+#header div {
+	font-size:130%;
+}
+
+#header div span {
+	font-size:90%;
+	margin-right:2em;
+}
+
 .red {
 	background-color: red;
 }

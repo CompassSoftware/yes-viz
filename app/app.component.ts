@@ -5,7 +5,8 @@ import {FileManagerService} from "./file-manager.service";
 import {ParserService} from "./parser.service";
 
 enum Views {
-	cyclenum, wstat, wicode, wvale, wvalm, wdste, wdstm,
+	cyclenum,
+	wstat, wicode, wvale, wvalm, wdste, wdstm,
 	mstat, micode, mcnd, mvale, mvala, mdste, mdstm,
 	estat, eicode, eifun, evalc, evala, evalb, edste, edstm, esrca, esrcb,
 	dstat, dicode, difun, dra, drb, dvalc, dvalp, 
@@ -30,7 +31,33 @@ export class AppComponent {
 	public isRed: boolean[];
 	public memRed: boolean[][];
     public viewName: string;
+
 	public views = Views;
+
+	public helpText =
+`YES Visual Simulator
+
+Welcome to the YES Visual Simulator.
+
+To Get Started, upload your dump file along with the correct dump file.
+
+
+Available commands upon uploading:
+
+
+Browse: Button to upload your dump files.
+
+
+Run: Will continue to cycle through your dump file and the correct dump file until a difference is found. Different values will be displayed as RED values.
+
+
+Next: Continues to the next cycle and checks for dump differences. If one dump file runs out of cycles, the other will continue.
+
+
+Change Dump File: Switch the currently displayed cycle between your dump file and the correct one.
+
+
+Previous: Backtracks to the last cycle.`;
 	
 	constructor(private _fileManagerService: FileManagerService,
 				private _parserService: ParserService) {
@@ -130,6 +157,8 @@ export class AppComponent {
 					this.userList.next();
 					this.correctList.next();
 					this.index++;
+					this.clearReds();
+					this.fixMemRedSize();
 				} else break;
 			} while(true);
 			this.cn = this.display.getCurrent();
@@ -149,10 +178,11 @@ export class AppComponent {
 		if(this.userList != null && this.correctList != null) this.compare();
 	}
 	
-	
+	helpListener() {
+		alert(this.helpText);
+	}
 	
 	private compare(): boolean {
-		this.clearReds();
 		var cn1 = this.userList.getCurrent();
 		var cn2 = this.correctList.getCurrent();
 		var isDifferent = false;
@@ -303,8 +333,9 @@ export class AppComponent {
 			this.isRed[this.views.oflag] = true;
 			isDifferent = true;
 		}
-		
-		for(var i = 0; i < Math.min(cn1.mem.length, cn2.mem.length); i++) {
+
+		var i: number;
+		for(i = 0; i < Math.min(cn1.mem.length, cn2.mem.length); i++) {
 			if(cn1.mem[i][0] != cn2.mem[i][0]) {
 				this.memRed[i][0] = true;
 				isDifferent = true;
@@ -328,16 +359,8 @@ export class AppComponent {
 		}
 		if(cn1.mem.length != cn2.mem.length) {
 			isDifferent = true;
-			var shorter: CycleNode;
-			var longer: CycleNode;
-			if(cn1.mem.length < cn2.mem.length) {
-				shorter = cn1;
-				longer = cn2;
-			} else {
-				shorter = cn2;
-				longer = cn1;
-			}
-			for(var i = shorter.mem.length; i < longer.mem.length; i++)	this.memRed[i][0] = true;
+			var n = this.display.getCurrent().mem.length;
+			for(i; i < n; i++) this.memRed[i][0] = true;
 		}
 		
 		return !isDifferent;
@@ -349,12 +372,13 @@ export class AppComponent {
 	}
 	
 	private updateCN() {
-		var cn = this.display.getCurrent();
-		this.fixMemRedSize(cn.mem.length);
-		this.cn = cn;
+		this.clearReds();
+		this.fixMemRedSize();
+		this.cn = this.display.getCurrent();
 	}
 
-	private fixMemRedSize(n: number) {
+	private fixMemRedSize() {
+		var n = this.display.getCurrent().mem.length;
 		for(var i = 0; i < n; i++) this.memRed[i] = [];
 	}
 }
