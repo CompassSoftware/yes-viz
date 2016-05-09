@@ -4,6 +4,10 @@ import {DoublyLinkedList} from "./DoublyLInkedList";
 import {FileManagerService} from "./file-manager.service";
 import {ParserService} from "./parser.service";
 
+/*
+* View is a enum used to index isRed for each value in each
+* pipeline register.
+*/
 enum Views {
 	cyclenum,
 	wstat, wicode, wvale, wvalm, wdste, wdstm,
@@ -14,6 +18,13 @@ enum Views {
 	zflag, sflag, oflag
 }
 
+/*
+* @Component
+*
+* component is an annotation that tells Angular, that the class, 
+* which the annotation is attached to, is a component. 
+*
+*/
 @Component({
 	selector: "my-app",
 	templateUrl: "app/app.component.html",
@@ -33,7 +44,8 @@ export class AppComponent {
     public viewName: string;
 
 	public views = Views;
-
+	
+	//Text for the help button
 	public helpText =
 `YES Visual Simulator
 
@@ -59,13 +71,24 @@ Change Dump File: Switch the currently displayed cycle between your dump file an
 
 Previous: Backtracks to the last cycle.`;
 	
+	/**
+	 * constructor for app component
+	 * Initilizes isRed and memRed arrays
+	 */
 	constructor(private _fileManagerService: FileManagerService,
 				private _parserService: ParserService) {
 		this.isRed = [];
 		this.memRed = [];
     }
 	
+	/**
+	 * userUploadLister 
+	 * 
+	 * Listener used for when the user is uploading their dump file.
+	 *
+	 */
 	userUploadListener($event) {
+		//If file exists 
 		if($event.target.files.length != 0) {
 			this._fileManagerService.callback = () : void => {
 				var data: string;
@@ -81,6 +104,13 @@ Previous: Backtracks to the last cycle.`;
 		}
 	}
 	
+	/*
+	* correctUploadListener
+	*
+	* Listener used for when the user is uploading the correct solution dump file
+	* If the valid file is selected for uploading, a doublylinkedlist will be created.
+	* The linked list is loaded one cycle at a time until all of the clock cycles are parsed.
+	*/
 	correctUploadListener($event) {
 		if($event.target.files.length != 0) {
 			this._fileManagerService.callback = () : void => {
@@ -97,6 +127,13 @@ Previous: Backtracks to the last cycle.`;
 		}
 	}
 
+	/**
+	 * nextListener
+	 * 
+	 * Listener used for when the next button is clicked.
+	 * Will continue to the next cycle if the end of the linkedlist(user or correct) has not been reached.
+	 * gotNext will track if there is a next cycle node.
+	 */
 	nextListener() {
 		var gotNext = false;
 		if(this.userList != null && this.index < this.userLength) {
@@ -114,6 +151,13 @@ Previous: Backtracks to the last cycle.`;
 		}
 	}
 	
+	/**
+	 * prevListener
+	 * 
+	 * Listener used for when the previous button is clicked.
+	 * Will cycle to the previous cycle node if the not at the start of the linkedlist(user or correct).
+	 * gotPrev will track if there is a previous cycle node.
+	 */
 	prevListener() {
 		if(this.index > 0) {
 			var gotPrev = false;
@@ -133,6 +177,12 @@ Previous: Backtracks to the last cycle.`;
 		}
 	}
 	
+	/**
+	 * resetLists
+	 * 
+	 * This method will reset correctList and userList if they are not null.
+	 * The index and file names displayed are also reset.
+	 */
 	resetLists() {
 		if(this.correctList != null) {
 			this.correctList.reset();
@@ -149,6 +199,13 @@ Previous: Backtracks to the last cycle.`;
 		if(this.userList != null && this.correctList != null) this.compare();
 	}
 	
+	/**
+	 * runListener
+	 * 
+	 * Listener used for when the run button is clicked.
+	 * This method will run until the end of the list has been reached or there is a error 
+	 * found in the user list. 
+	 */
 	runListener() {
 		if(this.userList != null && this.correctList != null) {
 			do {
@@ -165,6 +222,12 @@ Previous: Backtracks to the last cycle.`;
 		}
 	}
 	
+	/**
+	 * changeListener 
+	 * 
+	 * This listener is used to change the displayed file between the user file
+	 * and the correct solution file.
+	 */
 	changeListener() {
 		if(this.display == this.userList && this.correctList != null) {
 			this.display = this.correctList;
@@ -178,10 +241,22 @@ Previous: Backtracks to the last cycle.`;
 		if(this.userList != null && this.correctList != null) this.compare();
 	}
 	
+	/**
+	 * helpListener
+	 * 
+	 * This listener is used to display the help text for the application. 
+	 */
 	helpListener() {
 		alert(this.helpText);
 	}
 	
+	/**
+	 * compare
+	 * 
+	 * This method will compare all of the elements within pipeline registers, memory, and registers between the 
+	 * user and correct file. If there is an error found with comparing, the error is flagged in isRed or memRed 
+	 * depending on the element. 
+	 */
 	private compare(): boolean {
 		var cn1 = this.userList.getCurrent();
 		var cn2 = this.correctList.getCurrent();
@@ -366,17 +441,33 @@ Previous: Backtracks to the last cycle.`;
 		return !isDifferent;
 	}
 	
+	/**
+	* clearReds()
+	*
+	* Will reset isRed and memRed.
+	*/
 	private clearReds() {
 		this.isRed = [];
 		this.memRed = [];
 	}
 	
+	/**
+	 * updataCN
+	 * 
+	 * This method is called to update the cycle node to the current cycle node. isRed and memRed are cleared and
+	 * cn is set to the current cycle node.
+	 */
 	private updateCN() {
 		this.clearReds();
 		this.fixMemRedSize();
 		this.cn = this.display.getCurrent();
 	}
 
+	/**
+	 * fixMemRedSize
+	 * 
+	 * This method ensure that memRed will be initilized to the correct size.
+	 */
 	private fixMemRedSize() {
 		var n = this.display.getCurrent().mem.length;
 		for(var i = 0; i < n; i++) this.memRed[i] = [];
