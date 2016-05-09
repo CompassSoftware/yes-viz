@@ -16,6 +16,7 @@ export class CycleNode {
 	//predPC
 	public f: string;
 	
+	//Flags
 	public zf: string;
 	public sf: string;
 	public of: string;
@@ -25,9 +26,15 @@ export class CycleNode {
 	
 	public mem: string[][];
 	
+	//Needed for prev and next buttons
 	public next: CycleNode = null;
 	public previous: CycleNode = null;
 	
+	/**
+	 * constructor for the cycle node.
+	 * 
+	 * @param cycleNum:String - the number of the cycle
+	 */
 	constructor(cycleNum: string) {
 		this.cycleNum = cycleNum;
 		this.genRegs = [];
