@@ -1,3 +1,9 @@
+/*
+ * parser.service.ts
+ *
+ * Injectable service that parses a string to create a new CycleNode object.
+ * The string contains a single cycle from the dump file.
+ */
 import {Injectable} from "angular2/core";
 import {CycleNode} from "./cycle-node";
 
@@ -34,7 +40,7 @@ export class ParserService {
 	/**
 	 * createCycleNode
 	 * 
-	 * This method creates a new cycle node.
+	 * This method creates a new cycle node, and sets its cycle number variable.
 	 * 
 	 * @param data:string - first line in data.
 	 */

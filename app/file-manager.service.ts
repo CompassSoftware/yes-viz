@@ -1,3 +1,10 @@
+/*
+ * file-manager.service.ts
+ *
+ * An injectable angular service that reads data in from a dump file, and
+ * returns it divided into individual clock cycles. A callback function is also
+ * supported, to act on the data after it finishes reading.
+ */
 import {Injectable} from "angular2/core";
 
 @Injectable()
@@ -26,7 +33,8 @@ export class FileManagerService {
 	/**
 	 * getFileData
 	 * 
-	 * Accessor method for the file data.
+	 * Helper function used by readFile, to fill the data variable
+	 * after the file finishes reading in.
 	 * 
 	 * @param data: String
 	 * @param self: FileMangerService

@@ -1,3 +1,13 @@
+/*
+ * app.component.ts
+ *
+ * Root component for YES-Viz. This uses the file manager service and parser
+ * service to create up to two doubly linked lists, one for the user's dump
+ * file and one for the correct dump file. Users can browse the cycles
+ * of both lists, and the app will compare the current cycle of both lists,
+ * indicating differences with a red background. The app also can scan through
+ * cycles, stopping when a difference or the end is found.
+ */
 import {Component} from "angular2/core";
 import {CycleNode} from "./cycle-node";
 import {DoublyLinkedList} from "./DoublyLInkedList";
@@ -18,13 +28,6 @@ enum Views {
 	zflag, sflag, oflag
 }
 
-/*
-* @Component
-*
-* component is an annotation that tells Angular, that the class, 
-* which the annotation is attached to, is a component. 
-*
-*/
 @Component({
 	selector: "my-app",
 	templateUrl: "app/app.component.html",
@@ -85,11 +88,13 @@ Previous: Backtracks to the last cycle.`;
 	 * userUploadLister 
 	 * 
 	 * Listener used for when the user is uploading their dump file.
-	 *
+	 * If the valid file is selected for uploading, a doublylinkedlist will be created.
+	 * The linked list is loaded one cycle at a time until all of the clock cycles are parsed.
 	 */
 	userUploadListener($event) {
 		//If file exists 
 		if($event.target.files.length != 0) {
+			//Set the callback function to one that initializes the linked list
 			this._fileManagerService.callback = () : void => {
 				var data: string;
 				this.userList = new DoublyLinkedList();
@@ -107,12 +112,13 @@ Previous: Backtracks to the last cycle.`;
 	/*
 	* correctUploadListener
 	*
-	* Listener used for when the user is uploading the correct solution dump file
+	* Listener used for when the user is uploading the correct solution dump file.
 	* If the valid file is selected for uploading, a doublylinkedlist will be created.
 	* The linked list is loaded one cycle at a time until all of the clock cycles are parsed.
 	*/
 	correctUploadListener($event) {
 		if($event.target.files.length != 0) {
+			//Set the callback function to one that initializes the linked list
 			this._fileManagerService.callback = () : void => {
 				var data: string;
 				this.correctList = new DoublyLinkedList();
@@ -180,8 +186,8 @@ Previous: Backtracks to the last cycle.`;
 	/**
 	 * resetLists
 	 * 
-	 * This method will reset correctList and userList if they are not null.
-	 * The index and file names displayed are also reset.
+	 * This method will reset correctList and userList to their heads,
+	 * if they are not null. The index and file names displayed are also reset.
 	 */
 	resetLists() {
 		if(this.correctList != null) {
@@ -452,10 +458,10 @@ Previous: Backtracks to the last cycle.`;
 	}
 	
 	/**
-	 * updataCN
+	 * updateCN
 	 * 
-	 * This method is called to update the cycle node to the current cycle node. isRed and memRed are cleared and
-	 * cn is set to the current cycle node.
+	 * This method is called to update the display to the current cycle node.
+	 * isRed and memRed are cleared and cn is set to the current cycle node.
 	 */
 	private updateCN() {
 		this.clearReds();
