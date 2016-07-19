@@ -1,28 +1,34 @@
 {
-  "name": "angular2-quickstart",
+  "name": "yes-viz",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",    
+    "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "lite": "lite-server",
     "typings": "typings",
-    "postinstall": "typings install" 
+    "postinstall": "typings install",
+    "build": "gulp build"
   },
   "license": "ISC",
   "dependencies": {
-    "angular2": "2.0.0-beta.9",
-    "systemjs": "0.19.24",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
+    "angular2": "2.0.0-beta.17",
+    "systemjs": "0.19.31",
+    "es6-promise": "^3.2.1",
+    "es6-shim": "^0.35.1",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
-    "zone.js": "0.5.15"
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "0.6.12"
   },
   "devDependencies": {
-    "concurrently": "^2.0.0",
-    "lite-server": "^2.1.0",
-    "typescript": "^1.8.7",
-    "typings":"^0.7.5"
+    "concurrently": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-html-replace": "^1.6.1",
+    "gulp-typescript": "^2.13.6",
+    "gulp-uglify": "^1.5.4",
+    "lite-server": "^2.2.2",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.1"
   }
 }

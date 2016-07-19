@@ -6,4 +6,5 @@ node.exe
 npm*
 
 typings
-app/*.js*
+out
+build
