@@ -43,4 +43,6 @@ gulp.task("build", ["tscompile", "getLibs", "getBoot"], function() {
 	"app": "app.min.js",
 	"boot": "boot.min.js"
     })).pipe(gulp.dest("build"));
+
+    gulp.src("app/*.{html,css}").pipe(gulp.dest("build/app"));
 });
